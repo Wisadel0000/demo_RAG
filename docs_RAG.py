@@ -5,8 +5,8 @@ import pathlib as pl
 _data_dir = pl.Path("./docs-langchain")
 MODEL = "qwen3-embedding:4b"
 
-_data_client : chromadb.ClientAPI
-_data_base : chromadb.Collection
+_data_client : chromadb.ClientAPI = None
+_data_base : chromadb.Collection = None
 
 
 def embed(text:str|list[str]):
@@ -14,7 +14,7 @@ def embed(text:str|list[str]):
     return result["embeddings"]
 
 def collection_init():
-    global  _data_base , _data_client
+    global _data_client , _data_base
     if _data_client is None:
         _data_client = chromadb.Client()
     if _data_base is None:
